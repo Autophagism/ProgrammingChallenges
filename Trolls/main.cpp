@@ -51,7 +51,7 @@ void gameOver();
 void menu();
 
 int main() {
-    // Create window
+    // Create stdscrow
     initscr();
 
     // Don't display user input

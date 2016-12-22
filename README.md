@@ -19,4 +19,4 @@ This repository is a collection of all the programming challenges I've worked on
     - You can press `Esc` at any time to exit the game.
 * **Notes**: 
     - The game is rendered via ncurses, thus getting this game to work on Windows is probably more effort than it's worth. 
-    - Planning on adding dynamically-generated mazes.
+    - You may use `h`, `j`, `k`, `l` instead of the arrow keys as they are used in vim.

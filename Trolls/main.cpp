@@ -119,6 +119,7 @@ void gameplay() {
         int ch = getch();
         switch (ch) {
             case 'k':
+            case 'w':
             case KEY_UP:
                 charMaze[get<0>(myPos)][get<1>(myPos)] = ' ';
                 if (charMaze[get<0>(myPos)][get<1>(myPos)-1] == 'X')
@@ -137,6 +138,7 @@ void gameplay() {
                 trollMove();
                 break;
             case 'j':
+            case 's':
             case KEY_DOWN:
                 charMaze[get<0>(myPos)][get<1>(myPos)] = ' ';
                 if (charMaze[get<0>(myPos)][get<1>(myPos)+1] == 'X')
@@ -155,6 +157,7 @@ void gameplay() {
                 trollMove();
                 break;
             case 'h':
+            case 'a':
             case KEY_LEFT:
                 charMaze[get<0>(myPos)][get<1>(myPos)] = ' ';
                 if (charMaze[get<0>(myPos)-1][get<1>(myPos)] == 'X')
@@ -173,6 +176,7 @@ void gameplay() {
                 trollMove();
                 break;
             case 'l':
+            case 'd':
             case KEY_RIGHT:
                 charMaze[get<0>(myPos)][get<1>(myPos)] = ' ';
                 if (charMaze[get<0>(myPos)+1][get<1>(myPos)] == 'X')
@@ -582,17 +586,20 @@ void menu() {
         int press = getch();
         switch (press) {
             case 'k':
+            case 'w':
             case KEY_UP:
                 selection--;
                 if (selection == -1) selection = 3;
                 menuUpdate();
                 break;
             case 'j':
+            case 's':
             case KEY_DOWN:
                 selection = (selection+1) % 4;
                 menuUpdate();
                 break;
-            case 'l':
+            case 'h':
+            case 'a':
             case KEY_LEFT:
                 if (selection == 1) {
                     size--;
@@ -603,7 +610,8 @@ void menu() {
                 }
                 menuUpdate();
                 break;
-            case 'h':
+            case 'l':
+            case 'd':
             case KEY_RIGHT:
                 if (selection == 1) {
                     size = (size + 1) % 3;

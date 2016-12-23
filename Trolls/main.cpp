@@ -18,6 +18,9 @@ bool lose = false;
 // End of session flag
 bool done = false;
 
+// Whether or not the player has an arrow
+bool arrow;
+
 // User-chosen variables
 int numTrolls;
 int size;
@@ -67,6 +70,9 @@ bool emptyAdjacentCells(int x, int y);
 
 // Clears the screen
 void clearScreen();
+
+// Checks for if a troll has been hit
+void checkHit(int x, int y);
 
 int main() {
     // Create stdscrow
@@ -121,8 +127,11 @@ void gameplay() {
                     charMaze[get<0>(myPos)][get<1>(myPos)-1] = ' ';
                     charMaze[get<0>(myPos)][get<1>(myPos)-2] = '#';
                 } 
-                if (charMaze[get<0>(myPos)][get<1>(myPos)-1] == ' ') {
+                if (charMaze[get<0>(myPos)][get<1>(myPos)-1] == ' ')
                     get<1>(myPos)--;
+                else if (charMaze[get<0>(myPos)][get<1>(myPos)-1] == '-' || charMaze[get<0>(myPos)][get<1>(myPos)-1] == '|') {
+                    get<1>(myPos)--;
+                    arrow = true;
                 }
                 charMaze[get<0>(myPos)][get<1>(myPos)] = '^';
                 trollMove();
@@ -136,8 +145,11 @@ void gameplay() {
                     charMaze[get<0>(myPos)][get<1>(myPos)+1] = ' ';
                     charMaze[get<0>(myPos)][get<1>(myPos)+2] = '#';
                 } 
-                if (charMaze[get<0>(myPos)][get<1>(myPos)+1] == ' ') {
+                if (charMaze[get<0>(myPos)][get<1>(myPos)+1] == ' ') 
                     get<1>(myPos)++;
+                else if (charMaze[get<0>(myPos)][get<1>(myPos)+1] == '-' || charMaze[get<0>(myPos)][get<1>(myPos)+1] == '|') {
+                    get<1>(myPos)++;
+                    arrow = true;
                 }
                 charMaze[get<0>(myPos)][get<1>(myPos)] = 'v';
                 trollMove();
@@ -151,8 +163,11 @@ void gameplay() {
                     charMaze[get<0>(myPos)-1][get<1>(myPos)] = ' ';
                     charMaze[get<0>(myPos)-2][get<1>(myPos)] = '#';
                 } 
-                if (charMaze[get<0>(myPos)-1][get<1>(myPos)] == ' ') {
+                if (charMaze[get<0>(myPos)-1][get<1>(myPos)] == ' ')
                     get<0>(myPos)--;
+                else if (charMaze[get<0>(myPos)-1][get<1>(myPos)] == '-' || charMaze[get<0>(myPos)-1][get<1>(myPos)] == '|') {
+                    get<0>(myPos)--;
+                    arrow = true;
                 }
                 charMaze[get<0>(myPos)][get<1>(myPos)] = '<';
                 trollMove();
@@ -166,12 +181,66 @@ void gameplay() {
                     charMaze[get<0>(myPos)+1][get<1>(myPos)] = ' ';
                     charMaze[get<0>(myPos)+2][get<1>(myPos)] = '#';
                 } 
-                if (charMaze[get<0>(myPos)+1][get<1>(myPos)] == ' ') {
+                if (charMaze[get<0>(myPos)+1][get<1>(myPos)] == ' ')
                     get<0>(myPos)++;
+                else if (charMaze[get<0>(myPos)+1][get<1>(myPos)] == '-' || charMaze[get<0>(myPos)+1][get<1>(myPos)] == '|') {
+                    get<0>(myPos)++;
+                    arrow = true;
                 }
                 charMaze[get<0>(myPos)][get<1>(myPos)] = '>';
                 trollMove();
                 break;
+            case ' ':
+                if (arrow) {
+                    int x = get<0>(myPos);
+                    int y = get<1>(myPos);
+                    switch(charMaze[x][y]) {
+                        case '^':
+                            if (charMaze[x][y-1] != 'X' && charMaze[x][y-1] != '#') {
+                                while(charMaze[x][y-1] != 'X' && charMaze[x][y-1] != '#') {
+                                    y--;
+                                    checkHit(x, y);
+                                }
+                                arrow = false;
+                                charMaze[x][y] = '|';
+                            }
+                            break;
+                        case 'v':
+                            if (charMaze[x][y+1] != 'X' && charMaze[x][y+1] != '#') {
+                                while(charMaze[x][y+1] != 'X' && charMaze[x][y+1] != '#') {
+                                    y++;
+                                    checkHit(x, y);
+                                }
+                                arrow = false;
+                                charMaze[x][y] = '|';
+                            }
+                            break;
+                        case '<':
+                            if (charMaze[x-1][y] != 'X' && charMaze[x-1][y] != '#') {
+                                while(charMaze[x-1][y] != 'X' && charMaze[x-1][y] != '#') {
+                                    x--;
+                                    checkHit(x, y);
+                                }
+                                arrow = false;
+                                charMaze[x][y] = '-';
+                            }
+                            break;
+                        case '>':
+                            if (charMaze[x+1][y] != 'X' && charMaze[x+1][y] != '#') {
+                                while(charMaze[x+1][y] != 'X' && charMaze[x+1][y] != '#') {
+                                    x++;
+                                    checkHit(x, y);
+                                }
+                                arrow = false;
+                                charMaze[x][y] = '-';
+                            }
+                            break;
+                    }
+                    trollMove();
+                }
+
+                break;
+
             case 27:        // ESC
                 done = true;
                 return;
@@ -211,7 +280,7 @@ void mapGen() {
                 charMaze[j][i] = ' ';
         }
 
-    mazeCell(0, 0, 0);
+    mazeCell(rand() % width, rand() % width, 0);
 
     // Creates maze with characters based on maze data structure
     for (int i = 0; i < width; i++) {
@@ -243,6 +312,13 @@ void mapGen() {
         charMaze[get<0>(trolls[i])][get<1>(trolls[i])]  = 'T';
     }
 
+    // Arrow Placement //
+    do { 
+        x = rand() % width*2+1; 
+        y = rand() % width*2+1;
+    } while (charMaze[x][y] != ' ');
+    charMaze[x][y] = '-';
+
     printMap();
     wmove(stdscr, get<1>(myPos), get<0>(myPos));
 }
@@ -267,9 +343,11 @@ void printMap() {
     for(int i = 0; i < width*2+1; i++) {
         for(int j = 0; j < width*2+1; j++) {
             if (charMaze[j][i] == 'T')
-                waddch(stdscr, 'T' | COLOR_PAIR(1));
-            else if (charMaze[j][i] == 'X')
-                waddch(stdscr, 'X' | COLOR_PAIR(2));
+                waddch(stdscr, charMaze[j][i] | COLOR_PAIR(1));
+            else if (charMaze[j][i] == 'X' || charMaze[j][i] == '-'|| charMaze[j][i] == '|')
+                waddch(stdscr, charMaze[j][i] | COLOR_PAIR(2));
+            else if (get<0>(myPos) == j && get<1>(myPos) == i && arrow)
+                waddch(stdscr, charMaze[j][i] | A_UNDERLINE);
             else
                 waddch(stdscr, charMaze[j][i]);
         }
@@ -278,7 +356,6 @@ void printMap() {
     wrefresh(stdscr);
 }
 
-// TODO: Formatting
 void menuUpdate() {
     wmove(stdscr, 10, 14);
     switch (size) {
@@ -295,39 +372,9 @@ void menuUpdate() {
 
 
     wmove(stdscr, 12, 14);
-    // TODO: Just do int to char conversion?
-    switch (numTrolls) {
-        case 0:
-            waddch(stdscr, '0');
-            break;
-        case 1:
-            waddch(stdscr, '1');
-            break;
-        case 2:
-            waddch(stdscr, '2');
-            break;
-        case 3:
-            waddch(stdscr, '3');
-            break;
-        case 4:
-            waddch(stdscr, '4');
-            break;
-        case 5:
-            waddch(stdscr, '5');
-            break;
-        case 6:
-            waddch(stdscr, '6');
-            break;
-        case 7:
-            waddch(stdscr, '7');
-            break;
-        case 8:
-            waddch(stdscr, '8');
-            break;
-        case 9:
-            waddch(stdscr, '9');
-            break;
-    }
+    // Makes the actual number show up as a character
+    // This is probably a disgusting method of going about it
+    waddch(stdscr, numTrolls+48);
 
     // Moves cursor depending on menu selection
     switch (selection) {
@@ -346,8 +393,8 @@ void menuUpdate() {
     }
 }
 
-// TODO: Can i do ^2?
 void gameOver() {
+    arrow = false;
     clearScreen();
 
     // Draws borders of menu
@@ -451,7 +498,6 @@ void gameOver() {
     }
 }
 
-// TODO: Formatting
 void menu() {
     win = false;
     lose = false;
@@ -596,8 +642,6 @@ void mazeCell(int x, int y, int dir) {
         case W:
             maze[x][y] += E;
             break;
-        case 0:         // TODO: Necessary?
-            break;
     }
 
     while (emptyAdjacentCells(x, y)) {
@@ -655,5 +699,13 @@ void clearScreen() {
         waddch(stdscr, ' ');
     }
     wrefresh(stdscr);
+}
 
+void checkHit(int x, int y) {
+    if (charMaze[x][y] == 'T')
+        for (int i = 0; i < numTrolls; i++)
+            if (x == get<0>(trolls[i]) && y == get<1>(trolls[i])) {
+                get<0>(trolls[i]) = -1;
+                charMaze[x][y] = ' ';
+            }
 }

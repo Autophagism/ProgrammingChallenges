@@ -26,3 +26,15 @@ This repository is a collection of all the programming challenges I've worked on
 * **Notes**: 
     - The game is rendered via ncurses, thus getting this game to work on Windows is probably more effort than it's worth. 
     - You may use `h`, `j`, `k`, `l` instead of the arrow keys, just as they are used in vim.
+
+### Rectangles - [Link](https://www.reddit.com/r/dailyprogrammer/comments/5jpt8v/20161222_challenge_296_intermediate_intersecting/)
+ 
+* **Language**: Python
+* **Synopsis**: Calculates the area of a series of rectangles, each identified with two separate points
+* **How To Use**: 
+    - The program is run with `./rectangles.py point11 point 12 point21 point22`, where point11 and point 12 are two opposite corners of a rectangle, and so on.
+        * This may be run for any number of rectangles
+        * You may run the bonus challenge from the link with `./rectangles -3,0 1.8,4 1,1 -2.5,3.6 -4.1,5.75 0.5,2 -1.0,4.6 -2.9,-0.8`
+* **Notes**: 
+    - This program does not check for user input, it simply breaks if there is an uneven amount of arguments or non-number arguments passed
+    - Rounding errors are left in, not bothering to truncate lest programs with many significant digits or very low values suffer incorrect outputs as a result

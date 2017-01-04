@@ -38,3 +38,13 @@ This repository is a collection of all the programming challenges I've worked on
 * **Notes**: 
     - This program does not check for user input, it simply breaks if there is an uneven amount of arguments or non-number arguments passed
     - Rounding errors are left in, not bothering to truncate lest programs with many significant digits or very low values suffer incorrect outputs as a result
+
+### Parentheses - [Link](https://www.reddit.com/r/dailyprogrammer/comments/5llkbj/2017012_challenge_298_easy_too_many_parentheses/)
+ 
+* **Language**: C++
+* **Synopsis**: Strips superfluous brackets from a string
+* **How To Use**: 
+    - Compile with `g++ parentheses.cpp --output parentheses`
+    - Run with `./parentheses "((a))()(((b)(cd)))"` (for example)
+* **Notes**: 
+    - The challenge says easy but it was definitely harder than Rectangles

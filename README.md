@@ -48,3 +48,14 @@ This repository is a collection of all the programming challenges I've worked on
     - Run with `./parentheses "((a))()(((b)(cd)))"` (for example)
 * **Notes**: 
     - The challenge says easy but it was definitely harder than Rectangles
+
+### Parentheses2 - [Link](https://www.reddit.com/r/dailyprogrammer/comments/5m034l/20170104_challenge_298_intermediate_too_many_or/)
+ 
+* **Language**: C++
+* **Synopsis**: Tells you the index of a mismatched parenthesis, or the length of the input if no errors are found
+* **How To Use**: 
+    - Compile with `g++ parentheses2.cpp --output parentheses2`
+    - Run with `./parentheses "()(ab))"` (for example)
+* **Notes**: 
+    - This challenge was incredibly easy, especially with access to my previous parenthesis program. It took me about 5 minutes to write and test.
+    - It enrages me that this is listed as intermediate while the last was easy

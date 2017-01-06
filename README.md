@@ -52,7 +52,7 @@ This repository is a collection of all the programming challenges I've worked on
 ### Parentheses2 - [Link](https://www.reddit.com/r/dailyprogrammer/comments/5m034l/20170104_challenge_298_intermediate_too_many_or/)
  
 * **Language**: C++
-* **Synopsis**: Tells you the index of a mismatched parenthesis, or the length of the input if no errors are found
+* **Synopsis**: Shows you the most recent mismatched parenthesis, if any is found, by showing the output bolded in markdown format
 * **How To Use**: 
     - Compile with `g++ parentheses2.cpp --output parentheses2`
     - Run with `./parentheses "()(ab))"` (for example)

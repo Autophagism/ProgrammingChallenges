@@ -19,13 +19,22 @@ int main(int argc, char* argv[]) {
             unclosed++;
         }
         if (unclosed < 0) { 
-            cout << i << '\n';
+            for(int j = 0; j < length; j++){
+                if (i == j) cout << "**" << input[j] << "**";
+                else cout << input[j];
+            }
+            cout << '\n';
             return 0;
         }
     }
 
-    if (s.empty()) cout << length << '\n';
-    else cout << s.top() << '\n';
+        if (s.empty()) cout << input;
+        else for(int i = 0; i < length; i++){
+            if (i == s.top()) cout << "**" << input[i] << "**";
+            else cout << input[i];
+        }
 
-    return 0;
+        cout << '\n';
+
+        return 0;
 }

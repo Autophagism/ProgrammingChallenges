@@ -33,7 +33,6 @@ tuple<int, int> myPos;
 // Enemy positions
 tuple<int, int> trolls[10];
 
-
 // Menu navigation
 int selection;
 

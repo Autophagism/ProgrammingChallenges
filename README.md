@@ -72,18 +72,18 @@ This repository is a collection of all the programming challenges I've worked on
 
 ```
 ./encrypt "   \\\\  /\\    
-             \\
-    /         
-       \\     \\
-     \\        
-   /      /   
- \\  /      \\  
-      \\       
- \\/           
- /            
-           \  
-     \\/       
-    /       / " TpnQSjdmZdpoohd
+            \\
+   /         
+      \\     \\
+    \\        
+  /      /   
+\\  /      \\  
+     \\       
+\\/           
+/            
+          \  
+    \\/       
+   /       / " TpnQSjdmZdpoohd
 ```
 * **Notes**:
     - The actual encryption process was insultingly easy to write and took about 5 minutes, meanwhile I struggled for over an hour trying to get the input to work. Unfortunately, passing a backslash requires entering the character twice so that the program does not interpret them as escape characters.

@@ -94,7 +94,7 @@ This repository is a collection of all the programming challenges I've worked on
 * **Synopsis**: A simulation of the card game "War"
 * **How To Use**:
     - Running the program:
-        * `ruby war.rb "1 2 3 4 5 6 7 8 9 10 11 12 13 1 2 3 4 5 6 7 8 9 10 11 12 13 1 2 3 4 5 6 7 8 9 10 11 12 13 1 2 3 4 5 6 7 8 9 10 11 12 13`
+        * `ruby war.rb "1 2 3 4 5 6 7 8 9 10 11 12 13 1 2 3 4 5 6 7 8 9 10 11 12 13 1 2 3 4 5 6 7 8 9 10 11 12 13 1 2 3 4 5 6 7 8 9 10 11 12 13"`
         * You may separate the two players' hands with a newline, it makes no difference
         * Running the program without any arguments will cause a random game to be played
 * **Notes**:

@@ -86,3 +86,15 @@ This repository is a collection of all the programming challenges I've worked on
             /       / " TpnQSjdmZdpoohd
 * **Notes**:
     - The actual encryption process was insultingly easy to write and took about 5 minutes, meanwhile I struggled for over an hour trying to get the input to work. Unfortunately, passing a backslash requires entering the character twice so that the program does not interpret them as escape characters.
+
+### War - [Link](https://www.reddit.com/r/dailyprogrammer/comments/6ilyfi/20170621_challenge_320_intermediate_war_card_game/)
+
+* **Language**: Ruby
+* **Synopsis**: A simulation of the card game "War"
+* **How To Use**:
+    - Running the program:
+        * `ruby war.rb "1 2 3 4 5 6 7 8 9 10 11 12 13 1 2 3 4 5 6 7 8 9 10 11 12 13 1 2 3 4 5 6 7 8 9 10 11 12 13 1 2 3 4 5 6 7 8 9 10 11 12 13`
+        * You may separate the two players' hands with a newline, it makes no difference
+        * Running the program without any arguments will cause a random game to be played
+* **Notes**:
+    - I'm trying to learn Ruby, I figured this would be a good way to get some practice. I failed an attempt at my first hard problem while using C, so perhaps I'll be trying Ruby on the next one.

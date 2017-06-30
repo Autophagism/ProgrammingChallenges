@@ -3,7 +3,7 @@
 import sys
 
 # Sorts the coordinates so that point1 is the bottom left and point2 the top right
-def sortCoordinates(point1, point2):
+def sort_coordinates(point1, point2):
     for i in range (0,2):
         if (point1[i] > point2[i]):
             tempPoint = point1[i];
